@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto | Lacados Canarias</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+
+#paintBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: transparent;
+}
+
+
+/* ========================
+   RESET
+======================== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Montserrat',sans-serif;
+}
+
+/* ========================
+   BOTÓN DEL MENÚ
+======================== */
+
+.back-top {
+  display: inline-block;
+  margin: 50px auto;
+  padding: 15px 40px;
+  background: linear-gradient(90deg, #ff4d4d, #ffcc00, #00c3ff);
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
+  box-shadow: 0 0 15px #ffcc00, 0 0 30px #00c3ff; /* efecto neón */
+  transition: all 0.4s ease;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.back-top:hover {
+  transform: translateX(-50%) scale(1.1);
+  background: linear-gradient(90deg, #00c3ff, #ffcc00, #ff4d4d);
+  color: #fff;
+  box-shadow: 0 0 20px #00c3ff, 0 0 40px #ff4d4d; /* brillo más intenso */
+}
+
+/* Efecto de brillo deslizante */
+.back-top::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255,255,255,0.4);
+  transform: skewX(-25deg);
+}
+
+/* Al hacer hover, el brillo se mueve hacia la derecha */
+.back-top:hover::after {
+  animation: shine-right 0.8s forwards;
+}
+
+/* Al quitar hover, el brillo regresa hacia la izquierda */
+.back-top::after {
+  animation: shine-left 0.8s reverse paused;
+}
+
+.back-top:not(:hover)::after {
+  animation: shine-left 0.8s forwards;
+}
+
+/* Keyframes para el movimiento */
+@keyframes shine-right {
+  100% {
+    left: 125%;
+  }
+}
+
+@keyframes shine-left {
+  0% {
+    left: 125%;
+  }
+  100% {
+    left: -75%;
+  }
+}
+
+/* ========================
+   LOADER PROFESIONAL
+======================== */
+.loader{
+position:fixed;
+width:100%;
+height:100%;
+background:#0f0f0f;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+transition:opacity .8s ease, visibility .8s ease;
+}
+
+.loader.hidden{
+opacity:0;
+visibility:hidden;
+}
+
+.loader-circle{
+width:80px;
+height:80px;
+border:4px solid rgba(255,255,255,0.1);
+border-top:4px solid #ffcc00;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-bottom:20px;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
+.loader p{
+color:#aaa;
+letter-spacing:2px;
+font-size:14px;
+}
+
+/* ========================
+   BODY
+======================== */
+body{
+background:
+linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.85)),
+url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000') center/cover fixed no-repeat;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* ========================
+   HERO
+======================== */
+.hero {
+  min-height: 70vh; /* más bajo que 80vh */
+  padding: 60px 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeHero 1.5s ease forwards;
+  opacity: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(15,15,15,0.9), rgba(26,26,26,0.9)),
+    url('https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?q=80&w=2000') center/cover no-repeat;
+  filter: blur(1px);
+  transform: scale(1.05);
+  z-index: -1;
+}
+
+
+
+@keyframes slowZoom{
+0%{transform:scale(1.05);}
+100%{transform:scale(1.18);}
+}
+
+@keyframes fadeHero{
+to{opacity:1;}
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #f0f0f0; /* gris claro en vez de blanco puro */
+}
+
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  opacity: .7;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #ddd; /* tono más suave */
+}
+
+
+/* ========================
+   CONTACT SECTION
+======================== */
+.contact-section{
+padding:100px 8%;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+}
+
+.contact-info{
+display:flex;
+flex-direction:column;
+gap:30px;
+}
+
+.contact-info h2{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.contact-info div{
+display:flex;
+align-items:center;
+gap:15px;
+font-size:16px;
+opacity:.8;
+}
+
+.contact-info i{
+color:#ffcc00;
+font-size:20px;
+}
+
+.contact-form{
+background:rgba(255,255,255,0.05);
+padding:40px;
+border-radius:12px;
+backdrop-filter:blur(10px);
+box-shadow:0 10px 40px rgba(0,0,0,0.5);
+transition:.4s;
+}
+
+.contact-form:hover{
+transform:translateY(-5px);
+}
+
+.contact-form h2{
+margin-bottom:30px;
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:14px;
+margin-bottom:20px;
+border:none;
+border-radius:8px;
+background:rgba(255,255,255,0.1);
+color:#fff;
+outline:none;
+transition:.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+background:rgba(255,255,255,0.2);
+}
+
+.contact-form button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(90deg,#ff4d4d,#ffcc00,#00c3ff);
+color:#000;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.contact-form button:hover{
+transform:scale(1.05);
+}
+
+/* ========================
+   LOGOS
+======================== */
+.brands{
+padding:80px 8%;
+text-align:center;
+}
+
+.brands h3{
+margin-bottom:40px;
+font-size:22px;
+opacity:.7;
+}
+
+.brand-logos{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:40px;
+opacity:.7;
+}
+
+.brand-logos img {
+  max-height: 60px;
+  margin: 20px;
+  filter: grayscale(100%);
+  transition: .4s;
+}
+.brand-logos img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.1);
+}
+
+
+/* ========================
+   MAP
+======================== */
+.map{
+margin-top:60px;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* ========================
+   SEPARADOR
+======================== */
+
+.section-divider {
+  width: 80%;
+  height: 4px;
+  margin: 50px auto;
+  background: linear-gradient(90deg, #ff4d4d, #ffcc00, #00c3ff);
+  border-radius: 2px;
+}
+
+
+/* ========================
+   FOOTER
+======================== */
+footer{
+padding:40px 8%;
+text-align:center;
+background:#000;
+margin-top:100px;
+opacity:.7;
+font-size:14px;
+}
+
+.socials {
+  padding: 60px 8%;
+  text-align: center;
+}
+
+.socials h3 {
+  margin-bottom: 30px;
+  font-size: 20px;
+  opacity: .8;
+}
+
+.social-logos {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.social-logos a {
+  color: #fff;
+  transition: .3s;
+}
+
+.social-logos a:hover {
+  color: #ffcc00;
+  transform: scale(1.2);
+}
+
+
+/* ========================
+   RESPONSIVE
+======================== */
+@media(max-width:900px){
+.contact-section{
+grid-template-columns:1fr;
+}
+.hero h1{
+font-size:34px;
+}
+}
+
+</style>
+</head>
+
+<body>
+<canvas id="paintBackground"></canvas>
+
+<script>
+const canvas = document.getElementById("paintBackground");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+let drops = [];
+let splashes = []; // salpicaduras temporales
+
+// Paleta sobria y translúcida
+function randomColor(alpha = 0.3) {
+  const colors = [
+    `rgba(255,255,255,${alpha})`,
+    `rgba(200,200,200,${alpha})`,
+    `rgba(150,150,150,${alpha})`,
+    `rgba(255,204,0,${alpha})`,   // amarillo suave
+    `rgba(0,195,255,${alpha})`    // azul suave
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Partículas flotantes
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.radius = Math.random() * 2 + 1;
+    this.color = randomColor();
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = (Math.random() - 0.5) * 0.3;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+}
+
+// Gotas de pintura
+class Drop {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = -20;
+    this.radius = Math.random() * 6 + 3;
+    this.color = randomColor();
+    this.speedY = Math.random() * 1.5 + 0.5;
+  }
+  update() {
+    this.y += this.speedY;
+    if (this.y > canvas.height + this.radius) {
+      this.y = -20;
+      this.x = Math.random() * canvas.width;
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y - this.radius * 2);
+    ctx.lineTo(this.x, this.y);
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = this.radius / 2;
+    ctx.stroke();
+  }
+}
+
+// Salpicaduras difuminadas
+class Splash {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 60 + 30;
+    this.alpha = 0; // empieza invisible
+    this.fadeIn = true; // primero aparece
+    this.colorBase = randomColor(1); // color base con alpha máximo
+    this.life = 300; // duración total (~5s)
+  }
+  update() {
+    this.life--;
+
+    // Animación de aparición y desaparición
+    if (this.fadeIn) {
+      this.alpha += 0.02;
+      if (this.alpha >= 0.3) { // opacidad máxima
+        this.fadeIn = false;
+      }
+    } else {
+      this.alpha -= 0.005; // se va difuminando
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.colorBase.replace(/[\d.]+\)$/g, `${this.alpha})`);
+    ctx.fill();
+  }
+}
+
+// Inicializar
+for (let i = 0; i < 30; i++) particles.push(new Particle());
+for (let i = 0; i < 8; i++) drops.push(new Drop());
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Dibujar salpicaduras
+  splashes.forEach((s, i) => {
+    s.update();
+    s.draw();
+    if (s.life <= 0 || s.alpha <= 0) splashes.splice(i, 1);
+  });
+
+  // Dibujar partículas y gotas
+  particles.forEach(p => { p.update(); p.draw(); });
+  drops.forEach(d => { d.update(); d.draw(); });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// Crear nuevas salpicaduras cada cierto tiempo
+setInterval(() => {
+  splashes.push(new Splash());
+}, 3000);
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+
+<div class="loader">
+<div class="loader-circle"></div>
+<p>CARGANDO EXPERIENCIA PREMIUM...</p>
+</div>
+
+<section class="hero">
+<div>
+<h1>Contacte con Nosotros</h1>
+<p>Especialistas en lacados y barnizados profesionales con acabados de alta gama en todas las Islas Canarias.</p>
+</div>
+</section>
+
+<section class="contact-section">
+
+<div class="contact-info">
+<h2>Información de Contacto</h2>
+<div><i class="fas fa-map-marker-alt"></i> Las Palmas, Islas Canarias</div>
+<div><i class="fas fa-phone"></i> +34 600 000 000</div>
+<div><i class="fas fa-envelope"></i> info@lacadoscanarias.com</div>
+<div><i class="fas fa-clock"></i> Lunes a Viernes · 8:00 - 18:00</div>
+
+<div class="map">
+<iframe 
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.430523393769!2d-15.4362574843522!3d28.12354538262268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc4095f5c2d12345%3A0xabcdef123456!2sLas%20Palmas%20de%20Gran%20Canaria!5e0!3m2!1ses!2ses!4v1680000000000" 
+width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+</iframe>
+</div>
+
+</div>
+
+<div class="contact-form">
+<h2>Solicitar Presupuesto</h2>
+<form>
+<input type="text" placeholder="Nombre Completo" required>
+<input type="email" placeholder="Correo Electrónico" required>
+<input type="tel" placeholder="Teléfono">
+<textarea rows="5" placeholder="Describa su proyecto..." required></textarea>
+<button type="submit">Enviar Solicitud</button>
+</form>
+</div>
+
+</section>
+
+<section class="brands">
+  <h3>Trabajamos con las mejores marcas del sector</h3>
+  <div class="brand-logos">
+    <i class="fas fa-paint-roller fa-3x"></i>
+    <i class="fas fa-brush fa-3x"></i>
+    <i class="fas fa-hammer fa-3x"></i>
+    <i class="fas fa-industry fa-3x"></i>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="socials">
+  <h3>No se olvide de visitar nuestros sitios de difusión masiva para obtener las últimas noticias de nuestra empresa</h3>
+  <div class="social-logos">
+    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook fa-3x"></i></a>
+    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram fa-3x"></i></a>
+    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter fa-3x"></i></a>
+    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
+    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube fa-3x"></i></a>
+  </div>
+</section>
+
+<a href="index.html" class="back-top">Volver al principio</a>
+
+<footer>
+© 2026 Lacados Canarias · Excelencia en acabados profesionales
+</footer>
+
+<script>
+
+window.addEventListener("load",()=>{
+document.querySelector(".loader").classList.add("hidden");
+});
+
+</script>
+
+
+
+</body>
+</html>

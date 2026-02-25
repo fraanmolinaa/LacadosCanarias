@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios - Lacados Canarias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-servicios.css">
+
+<style>
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background: #0f0f0f;
+  color: #fff;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+.header-servicios {
+  position: fixed;
+  width: 100%;
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 8%;
+  z-index: 1000;
+  transition:  0.4s;
+}
+
+.header-servicios:hover {
+  background: rgba(0, 0, 0, 0);
+}
+
+.header-servicios h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: color 2.4s;
+  color: #ffffffc3;
+  text-shadow: 2px 2px 2px #00000065;
+  
+}
+
+.header-servicios h1:hover {
+  color: #00000065;
+  transition: color 2.4s;
+  text-shadow: 2px 2px 2px rgba(130, 130, 130, 0.678);
+  
+
+}
+
+/* ===== MENÚ HAMBURGUESA ===== */
+.hamburger-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.hamburger-menu .bar {
+  width: 28px;
+  height: 3px;
+  background-color: #ffffffbd;
+  margin: 5px 0;
+  transition: transform 0.3s,  0.3s;
+}
+
+.hamburger-menu:hover .bar {
+  background: #00000082;
+  transform: scaleX(1.2);transform: skewX(-90deg);
+
+}
+
+.hamburger-menu .dropdown {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: rgba(0,0,0,0.95);
+  list-style: none;
+  padding: 12px 0;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s;
+  min-width: 160px;
+}
+
+.hamburger-menu.active .dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hamburger-menu .dropdown li {
+  padding: 12px 20px;
+}
+
+.hamburger-menu .dropdown li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s, letter-spacing 0.3s;
+}
+
+.hamburger-menu .dropdown li a:hover {
+  color: #00c3ff;
+  letter-spacing: 1px;
+}
+
+/* ===== HERO ===== */
+.hero-servicios {
+  min-height: 240px;
+  background: linear-gradient(rgba(0, 0, 0, 0.264), rgba(0, 0, 0, 0)),
+              url('https://images.unsplash.com/photo-1565641576261-a0d19db34b9d?q=80&w=1033&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 49px 50px 8%;
+  animation: fadeInHero 1.5s ease forwards;
+}
+
+@keyframes fadeInHero {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-servicios h2 {
+  font-size: clamp(28px, 6vw, 60px);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ff4d4d, #ffcc00, #00c3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: underline;
+  text-shadow: 5px 7px 5px rgba(255, 255, 255, 0.245);
+}
+
+.hero-servicios p {
+  font-size: clamp(14px, 2.5vw, 20px);
+  margin-bottom: 25px;
+  max-width: 700px;
+  opacity: 0.9;
+  text-shadow: 2px 2px 2px black;
+}
+
+/* ===== BOTONES ===== */
+.primary, .back-top {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s;
+}
+
+.primary {
+  background: linear-gradient(90deg, #ff4d4d, #ffcc00, #00c3ff);
+  color: #fff;
+}
+
+.primary::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: rgba(255,255,255,0.3);
+  transform: skewX(-20deg);
+  transition: left 0.5s;
+}
+
+.primary:hover::after {
+  left: 120%;
+}
+
+.primary:hover {
+  transform: scale(1.08);
+  color: #000;
+}
+
+.back-top {
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.back-top:hover {
+  background: #00fff264;
+  color: #000;
+  border-color: #00fff264;
+  transform: translateY(-3px);
+}
+
+/* ===== SERVICIOS DETALLADOS ===== */
+.services-detail {
+  padding: 60px 8%;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  animation: fadeUp 1.2s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.services-detail h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: clamp(22px, 4vw, 36px);
+  text-transform: uppercase;
+}
+
+
+.service-block {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.image-container {
+  position: relative;
+  width: 320px;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.image-container img.active {
+  display: block;
+}
+
+/* Botones dentro del contenedor */
+.image-container button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s;
+  z-index: 10; /* asegura que estén por encima de la imagen */
+}
+
+.image-container button:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+.image-container .prev {
+  left: 10px;
+}
+
+.image-container .next {
+  right: 10px;
+}
+
+
+.service-block img {
+  width: 320px;          /* ancho fijo */
+  height: 220px;         /* alto fijo */
+  object-fit: cover;     /* recorta la imagen manteniendo proporción */
+  border-radius: 12px;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.service-block img:hover {
+  transform: scale(1.1); /* aumenta un 10% */
+  filter: brightness(1.2);
+}
+
+
+
+.service-info {
+  flex: 2 1 400px;
+  max-width: 600px;
+  padding: 20px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-info:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.service-info p {
+  margin-bottom: 15px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.service-info ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.service-info ul li {
+  margin-bottom: 10px;
+  padding-left: 28px;
+  position: relative;
+  font-size: 14px;
+  color: #fff;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.service-info ul li::before {
+  content: "➤";
+  position: absolute;
+  left: 0;
+  color: #00c3ff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.service-info ul li:hover {
+  color: #00c3ff;
+  transform: translateX(5px);
+}
+
+.service-info ul li:hover::before {
+  color: #ffcc00;
+}
+
+
+/* PUERTAS, ARRIBA HAY MAS CODIGO GENERAL */
+
+.servicio-puertas h2 {
+  text-align: center;
+  color: #3cb068;
+  text-shadow:2px 2px 2px #494949;
+  background-color: #00000000;
+}
+
+.servicio-puertas  {
+  background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.667)),
+              url('https://images.unsplash.com/photo-1600137626191-89389cca857b?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
+}
+
+/* COCINAS: CONTINUAR */
+
+.servicio-cocinas  {
+  background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.667)),
+              url('https://images.unsplash.com/photo-1559554704-0f74b35a8718?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
+}
+
+.servicio-cocinas h2 {
+  text-align: center;
+  color: #acb03c;
+  text-shadow:2px 2px 2px #494949;
+  background-color: #00000000;
+}
+
+/*  MUEBLES */
+.servicio-muebles  {
+  background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.667)),
+              url('https://images.unsplash.com/photo-1577176434922-803273eba97a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
+}
+
+.servicio-muebles h2 {
+  text-align: center;
+  color: #87421d;
+  text-shadow:2px 2px 2px #494949;
+  background-color: #00000000;
+}
+
+/* INDUSTRIAL */
+.servicio-industrial  {
+  background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.667)),
+              url('https://plus.unsplash.com/premium_photo-1745198321334-4a43eb239441?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
+}
+
+.servicio-industrial h2 {
+  text-align: center;
+  color: #da9b52;
+  text-shadow:2px 2px 2px #494949;
+  background-color: #00000000;
+}
+
+/* Leyenda */
+.legend {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #efefef;
+  text-shadow: 3px 3px 3px#000;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* ===== VENTAJAS ===== */
+
+.ventajas-servicios {
+  text-align: center;
+  background:linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.667)),
+              url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover; 
+}
+
+.ventajas-servicios h2 {
+  text-align: center;
+  color: #32fff5d9;
+  text-shadow: 2px 2px 2px gray;
+}
+
+.advantages {
+  padding: 60px 8%;
+  background: rgba(255,255,255,0.05);
+}
+
+.advantages h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.advantage-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.advantage-item {
+  flex: 1 1 220px;
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.advantage-item::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 212, 92, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+.advantage-item:hover::after {
+  left: 120%;
+}
+
+.advantage-item:hover {
+  transform: translateY(-5px) scale(1.03);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ===== CTA FINAL ===== */
+.cta-servicios {
+  text-align: center;
+  padding: 80px 8%;
+  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+              url('https://debandera.es/227-large_default/bandera-de-canarias.jpg') center/cover;
+}
+
+.cta-servicios h2 {
+  font-size: clamp(24px, 5vw, 40px);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.cta-servicios p {
+  margin-bottom: 25px;
+  font-size: clamp(14px, 2.5vw, 18px);
+  opacity: 0.9;
+}
+
+/* ===== FOOTER ===== */
+.footer-servicios {
+  background: #000;
+  text-align: center;
+  padding: 5px;
+  font-size: 14px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  color: #fff;
+  transition: background 0.6s ease, color 0.6s ease;
+  letter-spacing: 1px;
+}
+
+/* Hover con gradiente animado */
+.footer-servicios:hover {
+  background: linear-gradient(90deg, #ff4d4db2, #ffcc00b5, #00c3ffad);
+  color: #000;
+}
+
+/* Efecto de brillo en el texto */
+.footer-servicios::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.8s;
+}
+
+.footer-servicios:hover::after {
+  left: 100%;
+}
+
+/* Animación sutil */
+.footer-servicios {
+  overflow: hidden;
+}
+
+
+</style>
+
+</head>
+<body>
+
+<header class="header-servicios">
+  <h1>Lacados Canarias</h1>
+  <div class="hamburger-menu">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <ul class="dropdown">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="trabajos.html">Trabajos</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="presupuesto.html">Presupuesto</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- Hero de Servicios -->
+<section class="hero-servicios">
+  <div class="hero-content">
+    <h2>Nuestros Servicios</h2>
+    <p>Excelencia en lacados y barnizados para puertas, cocinas, muebles e instalaciones industriales. 
+       Cada proyecto refleja nuestro compromiso con la calidad, la innovación y la atención personalizada.</p>
+    <a href="presupuesto.html" class="primary">Solicitar Presupuesto</a>
+  </div>
+</section>
+
+<!-- Sección de Servicios Detallados -->
+<section class="servicio-puertas">
+  <h2>Lacado de Puertas</h2>
+  <div class="service-block">
+    
+<!-- COPIAR ESTA MISMA FORMULA PARA EL CARROUSEL DE LAS -->
+
+    <!-- Contenedor de imágenes -->
+    <div class="image-container">
+        <!-- Botón anterior -->
+    <button class="prev">⟨</button>
+      <img src="https://images.unsplash.com/photo-1559871753-75a00941f6b2?q=80&w=687&auto=format&fit=crop" alt="Puerta 1" class="active">
+      <img src="https://plus.unsplash.com/premium_photo-1683134599520-773666454183?q=80&w=706&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Puerta 2">
+      <img src="https://images.unsplash.com/photo-1600873040273-48e6da19ed94?q=80&w=654&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Puerta 3">
+      <img src="https://images.unsplash.com/photo-1503898362-59e068e7f9d8?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Puerta 4">
+      <img src="https://plus.unsplash.com/premium_photo-1683129719276-4e7ce97627cc?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Puerta 5">
+      <!-- Botón siguiente -->
+    <button class="next">⟩</button>
+    </div>
+
+    
+
+    <!-- Información del servicio -->
+    <div class="service-info">
+      <p>Renovamos puertas con acabados duraderos y elegantes. 
+         Utilizamos técnicas avanzadas que garantizan resistencia y estética superior, adaptándonos a estilos clásicos y modernos.</p>
+      <ul>
+        <li>Acabados personalizados según diseño</li>
+        <li>Durabilidad garantizada</li>
+        <li>Proceso rápido y eficiente</li>
+      </ul>
+    </div>
+  </div>
+  <p class="legend">Ideal para renovar la entrada de su hogar o negocio con un toque de distinción.</p>
+</section>
+
+
+<section class="servicio-cocinas">
+
+    <!-- APLICAR EL CARROUSEL DE LAS COCINAS -->
+
+  <h2>Lacado de Cocinas</h2>
+  <div class="service-block">
+    <div class="image-container">
+        <!-- Botón anterior -->
+    <button class="prev">⟨</button>
+      <img src="https://images.unsplash.com/photo-1512916194211-3f2b7f5f7de3?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cocina 1" class="active">
+      <img src="https://images.unsplash.com/photo-1721742736438-688c3f06c726?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cocina 2">
+      <img src="https://plus.unsplash.com/premium_photo-1661963483195-0af65f817b65?q=80&w=827&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cocina 3">
+      <img src="https://images.unsplash.com/photo-1668015642167-ba3c4c64825b?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cocina 4">
+      <img src="https://images.unsplash.com/photo-1722649934574-49bbddd3b5ae?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cocina 5">
+      <!-- Botón siguiente -->
+    <button class="next">⟩</button>
+    </div>
+    
+    <div class="service-info">
+      <p>Modernice su cocina sin necesidad de sustituir mobiliario. 
+         Transformamos superficies con lacados resistentes y de diseño contemporáneo, aportando frescura y estilo.</p>
+      <ul>
+        <li>Variedad de colores y acabados</li>
+        <li>Resistencia al uso diario</li>
+        <li>Estética renovada</li>
+      </ul>
+    </div>
+  </div>
+  <p class="legend">Una solución práctica y elegante para revitalizar su cocina.</p>
+</section>
+
+<section class="servicio-muebles">
+  <h2>Lacado de Muebles</h2>
+  <div class="service-block">
+    <div class="image-container">
+        <!-- Botón anterior -->
+    <button class="prev">⟨</button>
+      <img src="https://images.unsplash.com/photo-1516650556972-e9904734f467?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mueble 1" class="active">
+      <img src="https://images.unsplash.com/photo-1706380469091-3bd9b7865b71?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mueble 2">
+      <img src="https://images.unsplash.com/photo-1721222201158-60ebe6d99ae2?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mueble 3">
+      <img src="https://images.unsplash.com/photo-1597072689227-8882273e8f6a?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mueble 4">
+      <img src="https://images.unsplash.com/photo-1645926784924-49ae83b332e3?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mueble 5">
+      <!-- Botón siguiente -->
+    <button class="next">⟩</button>
+    </div>
+    
+    <div class="service-info">
+      <p>Recupere la belleza de sus muebles con técnicas de lacado que protegen y embellecen. 
+         Cada pieza recibe un tratamiento especializado para prolongar su vida útil.</p>
+      <ul>
+        <li>Protección contra desgaste</li>
+        <li>Acabados brillantes o mate</li>
+        <li>Personalización según estilo</li>
+      </ul>
+    </div>
+  </div>
+  <p class="legend">Perfecto para dar nueva vida a muebles antiguos o desgastados.</p>
+</section>
+
+<section class="servicio-industrial">
+  <h2>Lacado Industrial</h2>
+  <div class="service-block">
+    <div class="image-container">
+        <!-- Botón anterior -->
+    <button class="prev">⟨</button>
+      <img src="https://plus.unsplash.com/premium_photo-1745198323599-b910fda2187f?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Industrial 1" class="active">
+      <img src="https://images.unsplash.com/photo-1708517209353-6cc83fcc5464?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Industrial 2">
+      <img src="https://plus.unsplash.com/premium_photo-1682147364229-f5faa0fd9bd7?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Industrial 3">
+      <img src="https://images.unsplash.com/photo-1650424990277-12554d065923?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Industrial 4">
+      <img src="https://images.unsplash.com/photo-1757940113920-69e3686438d3?q=80&w=929&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Industrial 5">
+      <!-- Botón siguiente -->
+    <button class="next">⟩</button>
+    </div>
+    
+    <div class="service-info">
+      <p>Soluciones técnicas para empresas y carpinterías. 
+         Ofrecemos procesos de lacado industrial con estándares de máxima calidad, optimizando tiempos y resultados.</p>
+      <ul>
+        <li>Procesos adaptados a gran escala</li>
+        <li>Control de calidad riguroso</li>
+        <li>Optimización de tiempos de producción</li>
+      </ul>
+    </div>
+  </div>
+  <p class="legend">La opción ideal para proyectos empresariales y producción en serie.</p>
+</section>
+
+<!-- Bloque de Ventajas Competitivas -->
+<section class="ventajas-servicios">
+  <h2>¿Por qué elegir Lacados Canarias?</h2>
+  <div class="advantage-grid">
+    <div class="advantage-item">
+      <h3>Experiencia</h3>
+      <p>Más de 20 años en el sector, con proyectos de referencia en toda Canarias.</p>
+    </div>
+    <div class="advantage-item">
+      <h3>Calidad</h3>
+      <p>Materiales premium y procesos certificados para garantizar resultados superiores.</p>
+    </div>
+    <div class="advantage-item">
+      <h3>Innovación</h3>
+      <p>Aplicamos técnicas modernas y acabados personalizados según las tendencias actuales.</p>
+    </div>
+    <div class="advantage-item">
+      <h3>Compromiso</h3>
+      <p>Atención cercana y cumplimiento de plazos en cada proyecto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Final -->
+<section class="cta-servicios">
+  <h2>¿Listo para transformar sus espacios?</h2>
+  <p>Solicite su presupuesto sin compromiso y descubra cómo podemos darle nueva vida a sus puertas, muebles y cocinas.</p>
+  <a href="index.html" class="primary">Inicio</a>
+  <a href="servicios.html" class="back-top">Volver al principio</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-servicios">
+  © 2026 Lacados Canarias - Todos los derechos reservados
+</footer>
+
+<script>
+  const hamburger = document.querySelector('.hamburger-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+  });
+</script>
+<script>
+document.querySelectorAll('.service-block').forEach(block => {
+  const images = block.querySelectorAll('.image-container img');
+  let current = 0;
+
+  block.querySelector('.next').addEventListener('click', () => {
+    images[current].classList.remove('active');
+    current = (current + 1) % images.length;
+    images[current].classList.add('active');
+  });
+
+  block.querySelector('.prev').addEventListener('click', () => {
+    images[current].classList.remove('active');
+    current = (current - 1 + images.length) % images.length;
+    images[current].classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

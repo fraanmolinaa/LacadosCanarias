@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presupuesto - Lacados Canarias</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:
+        linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)),
+        url('https://images.unsplash.com/photo-1503387762-592deb58ef4e') center/cover fixed;
+    color:#fff;
+    padding:40px 8%;
+    overflow-x:hidden;
+}
+
+/* ELEMENTOS FLOTANTES */
+
+.floating{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:0;
+    overflow:hidden;
+}
+
+.float-item{
+    position:absolute;
+    width:70px;
+    opacity:0.07;
+    animation:float 35s linear infinite;
+}
+
+.float-item:nth-child(1){ left:10%; animation-duration:32s;}
+.float-item:nth-child(2){ left:25%; animation-duration:28s;}
+.float-item:nth-child(3){ left:45%; animation-duration:40s;}
+.float-item:nth-child(4){ left:65%; animation-duration:36s;}
+.float-item:nth-child(5){ left:85%; animation-duration:30s;}
+
+@keyframes float{
+    0%{ transform:translateY(110vh) rotate(0deg);}
+    100%{ transform:translateY(-150px) rotate(360deg);}
+}
+
+/* CONTENIDO */
+
+h1{
+    text-align:center;
+    margin-bottom:40px;
+    position:relative;
+    z-index:1;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:rgba(255,255,255,0.06);
+    padding:40px;
+    border-radius:15px;
+    backdrop-filter:blur(12px);
+    position:relative;
+    z-index:1;
+}
+
+label{
+    display:block;
+    margin-top:20px;
+    font-weight:600;
+}
+
+select,input{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    margin-top:30px;
+    padding:12px 20px;
+    border:none;
+    border-radius:25px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(90deg,#ff4d4d,#ffcc00,#00c3ff);
+    color:#000;
+}
+
+.resultado{
+    margin-top:30px;
+    padding:20px;
+    background:rgba(0,0,0,0.6);
+    border-radius:10px;
+    font-size:18px;
+}
+
+.volver{
+    display:inline-block;
+    margin-top:20px;
+    color:#00c3ff;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ELEMENTOS FLOTANTES -->
+<div class="floating">
+
+<!-- Baldes -->
+<svg class="float-item" viewBox="0 0 100 120">
+<rect x="20" y="40" width="60" height="60" rx="10" fill="#ff4d4d"/>
+<ellipse cx="50" cy="40" rx="30" ry="10" fill="#ffcc00"/>
+</svg>
+
+<svg class="float-item" viewBox="0 0 100 120">
+<rect x="20" y="40" width="60" height="60" rx="10" fill="#00c3ff"/>
+<ellipse cx="50" cy="40" rx="30" ry="10" fill="#ffffff"/>
+</svg>
+
+<!-- Aerosol 1 -->
+<svg class="float-item" viewBox="0 0 60 150">
+<rect x="15" y="40" width="30" height="80" rx="10" fill="#ffcc00"/>
+<rect x="20" y="20" width="20" height="20" rx="5" fill="#ffffff"/>
+</svg>
+
+<!-- Aerosol 2 -->
+<svg class="float-item" viewBox="0 0 60 150">
+<rect x="15" y="40" width="30" height="80" rx="10" fill="#00c3ff"/>
+<rect x="20" y="20" width="20" height="20" rx="5" fill="#ff4d4d"/>
+</svg>
+
+<!-- Balde extra -->
+<svg class="float-item" viewBox="0 0 100 120">
+<rect x="20" y="40" width="60" height="60" rx="10" fill="#ffffff"/>
+<ellipse cx="50" cy="40" rx="30" ry="10" fill="#00c3ff"/>
+</svg>
+
+</div>
+
+<h1>Calculadora de Presupuesto</h1>
+
+<div class="container">
+
+<label>Tipo de Trabajo</label>
+<select id="tipo">
+    <option value="lacado">Lacado</option>
+    <option value="barnizado">Barnizado</option>
+    <option value="restauracion">Restauración</option>
+</select>
+
+<label>Metros cuadrados (m²)</label>
+<input type="number" id="metros" placeholder="Ej: 12">
+
+<label>Calidad del Acabado</label>
+<select id="calidad">
+    <option value="estandar">Estándar</option>
+    <option value="premium">Premium</option>
+    <option value="industrial">Industrial</option>
+</select>
+
+<label>¿Es su primer servicio?</label>
+<select id="primerServicio">
+    <option value="no">No</option>
+    <option value="si">Sí</option>
+</select>
+
+<label>¿Viene por recomendación?</label>
+<select id="recomendacion">
+    <option value="no">No</option>
+    <option value="si">Sí</option>
+</select>
+
+<label>¿Cómo nos conoció?</label>
+<select id="origen">
+    <option value="otro">Otro medio</option>
+    <option value="tarjeta">Tarjeta de presentación</option>
+</select>
+
+<label>Código de Cupón (Opcional)</label>
+<input type="text" id="cupon" placeholder="Ej: BIENVENIDOS">
+
+<button onclick="calcular()">Calcular Presupuesto</button>
+
+<div class="resultado" id="resultado">
+El presupuesto aparecerá aquí.
+</div>
+
+<a href="index.html" class="volver">← Volver al Inicio</a>
+
+</div>
+
+<script>
+function calcular(){
+
+let tipo = document.getElementById("tipo").value;
+let metros = parseFloat(document.getElementById("metros").value);
+let calidad = document.getElementById("calidad").value;
+let primerServicio = document.getElementById("primerServicio").value;
+let recomendacion = document.getElementById("recomendacion").value;
+let origen = document.getElementById("origen").value;
+let cupon = document.getElementById("cupon").value.trim().toUpperCase();
+
+if(isNaN(metros) || metros <= 0){
+    document.getElementById("resultado").innerHTML = "Ingrese una cantidad válida.";
+    return;
+}
+
+let precioBase = {
+    lacado:28,
+    barnizado:22,
+    restauracion:35
+};
+
+let multiplicador = {
+    estandar:1,
+    premium:1.25,
+    industrial:1.40
+};
+
+let subtotal = metros * precioBase[tipo] * multiplicador[calidad];
+
+let descuento = 0;
+
+// descuentos internos
+if(primerServicio === "si") descuento += 0.05;
+if(recomendacion === "si") descuento += 0.05;
+if(origen === "tarjeta") descuento += 0.05;
+
+// cupones
+const cupones = {
+    "BIENVENIDOS":0.05,
+    "REFERIDOS":0.05,
+    "VIP10":0.10,
+    "CANARIAS15":0.15
+};
+
+if(cupones[cupon]){
+    descuento += cupones[cupon];
+}
+
+// máximo acumulable 30%
+if(descuento > 0.30){
+    descuento = 0.30;
+}
+
+let descuentoAplicado = subtotal * descuento;
+let subtotalConDescuento = subtotal - descuentoAplicado;
+let iva = subtotalConDescuento * 0.21;
+let total = subtotalConDescuento + iva;
+
+document.getElementById("resultado").innerHTML =
+"Subtotal: €" + subtotal.toFixed(2) +
+"<br>Descuento aplicado: -" + (descuento*100).toFixed(0) + "% (€" + descuentoAplicado.toFixed(2) + ")" +
+"<br>Subtotal con descuento: €" + subtotalConDescuento.toFixed(2) +
+"<br>IVA (21%): €" + iva.toFixed(2) +
+"<br><strong>Total estimado: €" + total.toFixed(2) + "</strong>" +
+"<br><br><small>*Presupuesto orientativo sujeto a inspección técnica.</small>";
+
+}
+</script>
+
+</body>
+</html>

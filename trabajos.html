@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabajos Realizados | Lacados Canarias</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+body{
+    background:linear-gradient(135deg,#0f0f0f,#1a1a1a);
+    color:#fff;
+    overflow-x:hidden;
+    animation:fadeInBody 1.2s ease forwards;
+    opacity:0;
+}
+
+@keyframes fadeInBody{
+    to{opacity:1;}
+}
+
+/* =========================
+   BURBUJAS
+========================= */
+.bubbles{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    overflow:hidden;
+    z-index:0;
+    pointer-events:none;
+}
+
+.bubbles span{
+    position:absolute;
+    bottom:-150px;
+    border-radius:50%;
+    opacity:0.15;
+    animation:rise linear infinite;
+}
+
+.bubbles span:nth-child(1){left:10%; width:80px; height:80px; background:#ff4d4d; animation-duration:18s;}
+.bubbles span:nth-child(2){left:25%; width:60px; height:60px; background:#00c3ff; animation-duration:22s;}
+.bubbles span:nth-child(3){left:40%; width:100px; height:100px; background:#ffcc00; animation-duration:25s;}
+.bubbles span:nth-child(4){left:60%; width:70px; height:70px; background:#ff4d4d; animation-duration:20s;}
+.bubbles span:nth-child(5){left:80%; width:90px; height:90px; background:#00c3ff; animation-duration:24s;}
+
+@keyframes rise{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(-120vh);}
+}
+
+/* =========================
+   HEADER
+========================= */
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    background:rgba(0,0,0,0.85);
+    backdrop-filter:blur(8px);
+    padding:15px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:0.4s;
+    z-index:1000;
+}
+header.hide{transform:translateY(-100%);}
+header h1{font-size:15px;font-weight:300;}
+
+/* =========================
+   MENÚ
+========================= */
+.menu-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:linear-gradient(90deg,#ff4d4d,#ffcc00,#00c3ff);
+    border:none;
+    color:#000;
+    font-size:20px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    cursor:pointer;
+    z-index:1200;
+    transition:0.3s;
+}
+.menu-btn:hover{transform:scale(1.1) rotate(10deg);}
+
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(3px);
+    top:0;
+    left:0;
+    opacity:0;
+    visibility:hidden;
+    transition:0.4s;
+    z-index:1040;
+}
+.overlay.active{opacity:1;visibility:visible;}
+
+.side-menu{
+    position:fixed;
+    top:0;
+    right:-300px;
+    width:300px;
+    height:100%;
+    background:rgba(20,20,20,0.85);
+    backdrop-filter:blur(15px);
+    padding:120px 40px;
+    transition:0.4s;
+    z-index:1100;
+}
+.side-menu.active{right:0;}
+.side-menu a{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    color:#fff;
+    text-decoration:none;
+    margin:30px 0;
+    font-size:18px;
+    transition:0.3s;
+}
+.side-menu a:hover{
+    color:#ffcc00;
+    transform:translateX(8px);
+}
+
+/* =========================
+   HERO
+========================= */
+.hero{
+    padding:180px 8% 80px;
+    text-align:center;
+    position:relative;
+    z-index:1;
+}
+.hero h1{font-size:42px;margin-bottom:20px;}
+.hero p{max-width:700px;margin:auto;opacity:0.8;}
+
+/* =========================
+   GALERÍA
+========================= */
+section{
+    padding:80px 8%;
+    position:relative;
+    z-index:1;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.gallery-item{
+    position:relative;
+    overflow:hidden;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    transform:translateY(40px);
+    opacity:0;
+    transition:0.6s;
+}
+
+.gallery-item.visible{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.gallery-item img{
+    width:100%;
+    display:block;
+    transition:opacity 0.5s ease, transform 0.6s ease;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.05);
+}
+
+/* =========================
+   BOTONES SLIDER
+========================= */
+.slider-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,0.5);
+    border:none;
+    color:#fff;
+    font-size:18px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    cursor:pointer;
+    transition:0.3s;
+    z-index:10;
+}
+
+.slider-btn:hover{
+    background:#ffcc00;
+    color:#000;
+}
+
+.prev{left:12px;}
+.next{right:12px;}
+
+/* =========================
+   CTA
+========================= */
+.cta{
+    text-align:center;
+    padding:100px 8%;
+}
+.primary{
+    background:linear-gradient(90deg,#ff4d4d,#ffcc00,#00c3ff);
+    padding:14px 28px;
+    border-radius:30px;
+    text-decoration:none;
+    color:#fff;
+    font-weight:600;
+    display:inline-block;
+    transition:0.3s;
+}
+.primary:hover{transform:scale(1.05);}
+
+.divider h2 {
+    font-size:30px;
+    font-weight:700;
+    background:linear-gradient(90deg,#ff4d4d,#ffcc00,#00c3ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.cta-divider {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:60px 0 40px;
+}
+
+.cta-divider span {
+    width:120px;
+    height:4px;
+    border-radius:4px;
+    background:linear-gradient(90deg,#ff4d4d,#ffcc00,#00c3ff);
+    animation:pulseLine 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseLine{
+    0%{transform:scaleX(1);opacity:0.7;}
+    50%{transform:scaleX(1.3);opacity:1;}
+    100%{transform:scaleX(1);opacity:0.7;}
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+    background:#000;
+    padding:50px 8%;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,0.1);
+}
+footer p{opacity:0.6;font-size:14px;}
+
+</style>
+</head>
+
+<body>
+
+<div class="bubbles">
+<span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<header id="header">
+<h1>Lacados Canarias</h1>
+</header>
+
+<button class="menu-btn" id="menuBtn"><i class="fas fa-ellipsis-v"></i></button>
+<div class="overlay" id="overlay"></div>
+
+<div class="side-menu" id="sideMenu">
+<a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+<a href="#"><i class="fas fa-tools"></i> Servicios</a>
+<a href="#"><i class="fas fa-users"></i> Nosotros</a>
+</div>
+
+<section class="hero">
+<h1>Trabajos Realizados</h1>
+<p>Proyectos ejecutados con precisión profesional y acabados premium en todas las Islas Canarias. La calidad no se promete. Se demuestra.
+    
+</p>
+</section>
+<div class="cta-divider">
+    <span></span>
+</div>
+<section>
+    
+<div class="gallery">
+<div class="divider">
+    <h2>Trabajos en Viviendas</h2>
+</div>
+<!-- BLOQUE 3 -->
+<div class="gallery-item" data-images="
+https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=1200,
+https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200,
+https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=1200,
+https://images.unsplash.com/photo-1615874959474-d609969a20ed?q=80&w=1200,
+https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200,
+https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=1200">
+
+<img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200">
+
+<button class="slider-btn prev">
+<i class="fas fa-chevron-left"></i>
+</button>
+
+<button class="slider-btn next">
+<i class="fas fa-chevron-right"></i>
+</button>
+
+</div>
+
+<!-- BLOQUE 4 -->
+ <div class="gallery">
+ <div class="divider">
+    <h2>Trabajos en Cocinas</h2>
+</div>
+<div class="gallery-item" data-images="
+https://images.unsplash.com/photo-1588854337115-1c67d9247e4d?q=80&w=1200,
+https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=1200,
+https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200,
+https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200,
+https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=1200">
+
+<img src="https://images.unsplash.com/photo-1588854337115-1c67d9247e4d?q=80&w=1200">
+
+<button class="slider-btn prev">
+<i class="fas fa-chevron-left"></i>
+</button>
+
+<button class="slider-btn next">
+<i class="fas fa-chevron-right"></i>
+</button>
+
+</div>
+
+</div>
+
+<div class="gallery">
+<div class="divider">
+    <h2>Trabajos en Habitaciones </h2>
+</div>
+<!-- BLOQUE 1 -->
+<div class="gallery-item" data-images="
+https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1200,
+https://images.unsplash.com/photo-1567016432779-094069958ea5?q=80&w=1200,
+https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200,
+https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200,
+https://images.unsplash.com/photo-1615874959474-d609969a20ed?q=80&w=1200,
+https://images.unsplash.com/photo-1600573472550-8090b5e0745e?q=80&w=1200">
+<img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1200">
+<button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+<button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+</div>
+</section>
+<div class="cta-divider">
+    <span></span>
+</div>
+<section class="cta">
+<h2>¿Quiere un resultado como estos?</h2>
+<br>
+<a href="presupuesto.html" class="primary">Solicitar Presupuesto</a>
+</section>
+
+<footer>
+<p>© 2025 Lacados Canarias · Todos los derechos reservados</p>
+</footer>
+
+<script>
+
+/* HEADER */
+let lastScroll=0;
+const header=document.getElementById("header");
+window.addEventListener("scroll",()=>{
+const currentScroll=window.pageYOffset;
+if(currentScroll>lastScroll&&currentScroll>100){
+header.classList.add("hide");
+}else{
+header.classList.remove("hide");
+}
+lastScroll=currentScroll;
+});
+
+/* MENÚ */
+const menuBtn=document.getElementById("menuBtn");
+const sideMenu=document.getElementById("sideMenu");
+const overlay=document.getElementById("overlay");
+
+function toggleMenu(){
+sideMenu.classList.toggle("active");
+overlay.classList.toggle("active");
+menuBtn.innerHTML=sideMenu.classList.contains("active")
+?'<i class="fas fa-times"></i>'
+:'<i class="fas fa-ellipsis-v"></i>';
+}
+menuBtn.addEventListener("click",toggleMenu);
+overlay.addEventListener("click",toggleMenu);
+
+/* OBSERVER */
+const items=document.querySelectorAll(".gallery-item");
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("visible");
+}
+});
+},{threshold:0.2});
+items.forEach(item=>observer.observe(item));
+
+/* SLIDER COMPLETO */
+document.querySelectorAll(".gallery-item").forEach(item=>{
+
+const img=item.querySelector("img");
+const images=item.dataset.images.split(",").map(i=>i.trim());
+let index=0;
+let interval;
+
+/* AUTOPLAY HOVER */
+item.addEventListener("mouseenter",()=>{
+interval=setInterval(()=>{
+index=(index+1)%images.length;
+fadeChange(images[index]);
+},3500);
+});
+
+item.addEventListener("mouseleave",()=>{
+clearInterval(interval);
+});
+
+/* CAMBIO CON FADE */
+function fadeChange(src){
+img.style.opacity=0;
+setTimeout(()=>{
+img.src=src;
+img.style.opacity=1;
+},250);
+}
+
+/* BOTÓN NEXT */
+item.querySelector(".next").addEventListener("click",(e)=>{
+e.stopPropagation();
+clearInterval(interval);
+index=(index+1)%images.length;
+fadeChange(images[index]);
+});
+
+/* BOTÓN PREV */
+item.querySelector(".prev").addEventListener("click",(e)=>{
+e.stopPropagation();
+clearInterval(interval);
+index=(index-1+images.length)%images.length;
+fadeChange(images[index]);
+});
+
+});
+
+</script>
+
+</body>
+</html>
